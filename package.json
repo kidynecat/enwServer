@@ -1,0 +1,26 @@
+{
+  "name": "koaserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cheerio": "^0.22.10",
+    "@types/mongoose": "^5.3.4",
+    "cheerio": "^1.0.0-rc.2",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.3.16"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.47",
+    "@types/koa-router": "^7.0.35",
+    "nodemon": "^1.18.8",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  }
+}
