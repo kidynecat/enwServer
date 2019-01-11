@@ -2,10 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 let Schema = mongoose.Schema;
-var wordgroupSchema = new Schema({
-    name: String,
-    trans: String
-});
+// var wordgroupSchema = new Schema({ 
+//     name: String ,
+//     trans: String
+// });
+class wordgroupSchema {
+    constructor() {
+    }
+}
 let wordSchema = new Schema({
     word: String,
     yinbiao: [String],
@@ -35,14 +39,6 @@ class Mgs {
     }
     async saveWord(key, docu) {
         return await word.updateOne({ word: key }, docu, { upsert: true });
-    }
-    async addfield(conditions) {
-        let tmp = await word.find(conditions, '_id');
-        tmp.forEach(async function (item) {
-            console.log(item.get("word"));
-            let res = await word.updateOne({ _id: item._id }, { $unset: { keyword: 1 } }, { upsert: true });
-        });
-        //return await word.updateOne(conditions,docu,{upsert:true})
     }
 }
 exports.default = new Mgs();

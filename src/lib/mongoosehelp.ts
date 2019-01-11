@@ -3,10 +3,19 @@ import * as mongoose from 'mongoose'
 let Schema = mongoose.Schema;
 
 
-var wordgroupSchema = new Schema({ 
-    name: String ,
+// var wordgroupSchema = new Schema({ 
+//     name: String ,
+//     trans: String
+// });
+
+class wordgroupSchema{
+    constructor()
+    {
+
+    }
+    name: String 
     trans: String
-});
+}
 
 let wordSchema = new Schema({
     word:String,
@@ -47,17 +56,17 @@ class Mgs{
         
     }
 
-    public async addfield( conditions :any){
+    // public async addfield( conditions :any){
 
-        let tmp = await word.find(conditions,'_id')
+    //     let tmp = await word.find(conditions,'_id')
 
-        tmp.forEach(async function(item){
-            console.log(item.get("word"))
-            let res = await word.updateOne({_id:item._id},{ $unset:{keyword:1}},{upsert:true})
-        })
+    //     tmp.forEach(async function(item){
+    //         console.log(item.get("word"))
+    //         let res = await word.updateOne({_id:item._id},{ $unset:{keyword:1}},{upsert:true})
+    //     })
 
-        //return await word.updateOne(conditions,docu,{upsert:true})
-    }
+
+    // }
 
     
 }
