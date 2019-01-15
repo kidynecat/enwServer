@@ -3,19 +3,11 @@ import * as mongoose from 'mongoose'
 let Schema = mongoose.Schema;
 
 
-// var wordgroupSchema = new Schema({ 
-//     name: String ,
-//     trans: String
-// });
-
-class wordgroupSchema{
-    constructor()
-    {
-
-    }
-    name: String 
+var wordgroupSchema = new Schema({ 
+    name: String ,
     trans: String
-}
+},{_id: false});
+
 
 let wordSchema = new Schema({
     word:String,
@@ -65,7 +57,7 @@ class Mgs{
     //         let res = await word.updateOne({_id:item._id},{ $unset:{keyword:1}},{upsert:true})
     //     })
 
-
+    //     //return await word.updateOne(conditions,docu,{upsert:true})
     // }
 
     

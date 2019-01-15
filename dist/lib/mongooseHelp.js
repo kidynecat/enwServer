@@ -2,14 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 let Schema = mongoose.Schema;
-// var wordgroupSchema = new Schema({ 
-//     name: String ,
-//     trans: String
-// });
-class wordgroupSchema {
-    constructor() {
-    }
-}
+var wordgroupSchema = new Schema({
+    name: String,
+    trans: String
+}, { _id: false });
 let wordSchema = new Schema({
     word: String,
     yinbiao: [String],
