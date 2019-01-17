@@ -44,6 +44,7 @@ class youdaoCrawler {
         let yinbiaoArray = [];
         let fanyiArray = [];
         let wordgroupArray = [];
+        let wordexampleArray = [];
         let savedata = {
             word: "",
             yinbiao: yinbiaoArray,
@@ -51,6 +52,7 @@ class youdaoCrawler {
             rank: "",
             star: "",
             wordgroup: wordgroupArray,
+            wordexample: wordexampleArray,
             wordhtml: htmlbody
         };
         try {
@@ -80,6 +82,21 @@ class youdaoCrawler {
                 let n = $(this).children().text();
                 let t = this.lastChild;
                 savedata.wordgroup.push({ name: $(this).children().text(), trans: this.lastChild.nodeValue.replace(/^\s+|\s+$/g, "") });
+            });
+            $('#bilingual .ol').children().each(function () {
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g, "");
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g, "");
+                savedata.wordexample.push({ example: example, memo: memo });
+            });
+            $('#originalSound .ol').children().each(function () {
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g, "");
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g, "");
+                savedata.wordexample.push({ example: example, memo: memo });
+            });
+            $('#authority .ol').children().each(function () {
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g, "");
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g, "");
+                savedata.wordexample.push({ example: example, memo: memo });
             });
         }
         catch (e) {

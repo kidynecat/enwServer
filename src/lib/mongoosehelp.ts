@@ -8,6 +8,10 @@ var wordgroupSchema = new Schema({
     trans: String
 },{_id: false});
 
+var wordexampleSchema = new Schema({ 
+    example: String ,
+    memo: String
+},{_id: false});
 
 let wordSchema = new Schema({
     word:String,
@@ -16,6 +20,7 @@ let wordSchema = new Schema({
     rank:String,
     star:String,
     wordgroup:[wordgroupSchema],
+    wordexample:[wordexampleSchema],
     wordhtml:String
 })
 wordSchema.index({word:1})

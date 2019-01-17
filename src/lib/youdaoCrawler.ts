@@ -58,6 +58,7 @@ class youdaoCrawler {
         let yinbiaoArray: any[] = []
         let fanyiArray: any[] = []
         let wordgroupArray: any[] = []
+        let wordexampleArray : any[] = []
 
         let savedata = {
             word: "",
@@ -66,7 +67,9 @@ class youdaoCrawler {
             rank: "",
             star: "",
             wordgroup:wordgroupArray,
+            wordexample : wordexampleArray,
             wordhtml: htmlbody
+            
         }
 
         try {
@@ -112,6 +115,29 @@ class youdaoCrawler {
                 savedata.wordgroup.push({name: $(this).children().text(),trans: this.lastChild.nodeValue.replace(/^\s+|\s+$/g,"")}) 
             })
 
+
+            $('#bilingual .ol').children().each(function(){
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g,"")
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g,"")
+                savedata.wordexample.push({example:example,memo:memo})
+
+            })
+
+            $('#originalSound .ol').children().each(function(){
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g,"")
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g,"")
+                savedata.wordexample.push({example:example,memo:memo})
+
+            })
+
+            $('#authority .ol').children().each(function(){
+                let example = $(this).children().eq(0).text().replace(/^\s+|\s+$/g,"")
+                let memo = $(this).children().eq(1).text().replace(/^\s+|\s+$/g,"")
+                savedata.wordexample.push({example:example,memo:memo})
+
+            })
+
+            
         }
         catch (e) {
             console.log(e)
