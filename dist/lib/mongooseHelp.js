@@ -33,7 +33,7 @@ class Mgs {
     }
     async getWord(key) {
         let reg = new RegExp("^" + key + "$", "i");
-        return await word.findOne({ word: reg }, 'word fanyi yinbiao rank star wordgroup');
+        return await word.findOne({ word: reg }, 'word fanyi yinbiao rank star wordgroup wordexample');
     }
     async getWords(docu) {
         return await word.find(docu, 'word fanyi yinbiao rank star');
