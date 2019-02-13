@@ -12,7 +12,7 @@ router.get('/', async (ctx) => {
     //返回查询结果，如果库中没有数据则从有道中获取，code{200：成功，201：有道成功,500:失败}
     .get('/getKeyWord', async (ctx) => {
     try {
-        let key = ctx.request.query.key;
+        let key = encodeURI(ctx.request.query.key);
         let d = await mongoosehelp_1.default.getWord(key);
         ctx.set("Access-Control-Allow-Origin", "*");
         var result = {
@@ -49,7 +49,7 @@ router.get('/', async (ctx) => {
 })
     .get('/getyoudao', async (ctx) => {
     try {
-        let key = ctx.request.query.key;
+        let key = encodeURI(ctx.request.query.key);
         let d = await youdaoCrawler_1.default.getyoudaoword(key);
         let savedata = youdaoCrawler_1.default.handleyoudao(d);
         if (savedata == null) {

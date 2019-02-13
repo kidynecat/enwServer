@@ -16,7 +16,7 @@ router.get('/', async (ctx) => {
 .get('/getKeyWord', async (ctx) => {
     try
     {
-        let key = ctx.request.query.key
+        let key = encodeURI(ctx.request.query.key)
         let d = await Mgs.getWord(key);
         ctx.set("Access-Control-Allow-Origin","*")
 
@@ -67,7 +67,7 @@ router.get('/', async (ctx) => {
 .get('/getyoudao', async (ctx) => {
     try
     {
-        let key = ctx.request.query.key
+        let key = encodeURI(ctx.request.query.key)
         let d = await youdao.getyoudaoword(key)
         let savedata = youdao.handleyoudao(d)
 
