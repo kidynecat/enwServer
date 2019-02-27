@@ -25,16 +25,37 @@ let wordSchema = new Schema({
 })
 wordSchema.index({word:1})
 
-let word = mongoose.model('word', wordSchema);
+var db = mongoose.createConnection('mongodb://localhost/ENW');
+let word = db.model('word', wordSchema);
+
+
+let oldwordSchema = new Schema({
+    word:String,
+    yinbiao:[String],
+    fanyi:[String],
+    rank:String,
+    star:String,
+    wordhtml:String
+})
+oldwordSchema.index({word:1})
+
+var olddb = mongoose.createConnection('mongodb://localhost/Enword');
+let oldword = olddb.model('word', oldwordSchema);
 
 class Mgs{
     constructor(){
-        mongoose.connect('mongodb://localhost/ENW');
-        var db = mongoose.connection;
+        
+        //var db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
             console.log('数据库已连接')
         });
+
+        olddb.on('error', console.error.bind(console, 'connection error:'));
+        olddb.once('open', function() {
+            console.log('老数据库已连接')
+        });
+
     }
 
     public async getWord(key:string){
@@ -42,15 +63,20 @@ class Mgs{
         return await word.findOne({word:reg},'word fanyi yinbiao rank star wordgroup wordexample')
     }
 
-    public async getWords(docu:any){
-        return await word.find(docu,'word fanyi yinbiao rank star')
+    public async getOldWords(docu:any){
+        let oldDatas = await oldword.find(docu,'word wordhtml').skip(93).limit(1)
+        return oldDatas
+
     }
 
     public async saveWord( key:string,docu:any){
+
         return await word.updateOne({word:key},docu,{upsert:true})
+    }
 
 
-        
+    public async getOldWord(){
+
     }
 
     // public async addfield( conditions :any){

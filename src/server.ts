@@ -87,6 +87,23 @@ router.get('/', async (ctx) => {
     }
 })
 
+.get('/getOldData', async (ctx) => {
+    try
+    {
+
+        //取出老库单词
+        
+
+        //保存之新库
+
+        //youdao.handleyoudao()
+    }
+    catch(e)
+    {
+        ctx.body = '服务异常:' + e
+    }
+})
+
 // .get('/addfield',async (ctx) => {
 //     try
 //     {
@@ -100,14 +117,48 @@ router.get('/', async (ctx) => {
 //     }
 // })
 
-.post('/getAny', async (ctx) => {
+//为老字典增加新字段功能
+.post('/reflashOldData', async (ctx) => {
     try
     {
         console.log(ctx.request.query)
 
-        let data = ctx.request.query
-        let d = await Mgs.getWords(data);
-        ctx.body = d;
+        //读取老字典库
+        let data = {star:{$eq:''}}
+        let d = await Mgs.getOldWords(data);
+
+        //处理后插入新字典库
+        //let result:any[]=[];
+        // d.forEach(async olddata => {
+        //     result.push(youdao.handleyoudao(olddata.toObject().wordhtml))
+        //     let oldwordname = olddata.toObject().word
+        //     let resulttmp = youdao.handleyoudao(olddata.toObject().wordhtml)
+
+        //     let sr = await Mgs.saveWord(oldwordname,resulttmp)
+
+        //     console.log(sr)
+        // });
+
+        for(let i = 0;i<d.length;i++)
+        {
+            let oldwordname = d[i].toObject().word
+            try
+            {
+            
+            let resulttmp = youdao.handleyoudao(d[i].toObject().wordhtml)
+
+
+            let sr = await Mgs.saveWord(oldwordname,resulttmp)
+            console.log( (i+1)+'条：' +sr)
+
+            }
+            catch(ex){
+                console.log( (i+1)+'条：异常 ' + oldwordname + ';' + ex)
+            }
+            
+        }
+
+        ctx.body = '正在从老库中处理数据到新库';
     }
     catch(e)
     {
